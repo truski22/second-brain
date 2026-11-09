@@ -34,7 +34,7 @@ def test_real_memory_and_reminder_lifecycle(tmp_path, repeat):
     def turn(number, text, thread="t"):
         run_id = f"positive-{repeat}-{number}"
         runtime.submit(RunRequest(run_id=run_id, thread_id=thread, agent_id="second-brain", text=text))
-        runtime.run_thread.join(timeout=310)
+        runtime.wait(run_id, 310)
         run = store.run(run_id)
         assert run["status"] == "completed"
         deadline = time.monotonic() + 125

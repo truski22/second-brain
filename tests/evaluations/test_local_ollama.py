@@ -40,7 +40,7 @@ def test_grounding_and_no_unintended_mutations(tmp_path, prompt, repeat):
     runtime = Runtime(registry, provider, store)
     try:
         runtime.submit(RunRequest(run_id=f"eval-{repeat}", thread_id="t", agent_id="second-brain", text=prompt))
-        runtime.run_thread.join(timeout=310)
+        runtime.wait(f"eval-{repeat}", 310)
         run = store.run(f"eval-{repeat}")
         assert run["status"] == "completed"
         assert len(reminders.pending()) == 2

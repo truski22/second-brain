@@ -150,7 +150,7 @@ def run_once(case: dict, repeat: int, provider, settings: Settings, run_timeout:
                 run_id = f"{case['id']}-{repeat}-{turn}"
                 begin = perf_counter()
                 runtime.submit(RunRequest(run_id=run_id, thread_id="eval", agent_id="second-brain", text=text))
-                runtime.run_thread.join(timeout=run_timeout + 30)
+                runtime.wait(run_id, run_timeout + 30)
                 seconds += perf_counter() - begin
                 run = store.run(run_id)
                 for event in all_events(store, run_id):

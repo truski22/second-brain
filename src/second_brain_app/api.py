@@ -177,7 +177,7 @@ def create_app(*, token: str, port: int, settings: Settings | None = None,
                 "configured_timezone": effective.timezone,
                 "models": models, "ollama_ready": ready, "issue": issue,
                 "data_dir": str(effective.data_dir), "voice_ready": app.state.voice.ready(),
-                "active_run": app.state.runtime.active_id}
+                "active_run": next(iter(app.state.runtime.active_run_ids), None)}
 
     @app.get("/api/agents")
     def agents():
@@ -289,24 +289,19 @@ def create_app(*, token: str, port: int, settings: Settings | None = None,
     @app.put("/api/settings")
     def update_settings(body: UserSettings):
         runtime = app.state.runtime
-        if not runtime.gate.acquire(blocking=False):
-            raise BusyError("Espera a que termine la respuesta.")
-        try:
-            with runtime.model_gate:
-                effective = replace(app.state.settings, model=body.model, timezone=body.timezone)
-                with httpx.Client(timeout=3, trust_env=False) as client:
-                    response = client.get(effective.ollama_url + "/api/tags")
-                    response.raise_for_status()
-                    names = [model["name"] for model in response.json()["models"]]
-                if body.model not in names:
-                    raise ValueError("Selecciona un modelo instalado en Ollama.")
-                app.state.store.save_settings(body.model_dump())
-                app.state.settings = effective
-                runtime.provider.model = body.model
-                app.state.clock.timezone = body.timezone
-                return body
-        finally:
-            runtime.gate.release()
+        with runtime.exclusive():
+            effective = replace(app.state.settings, model=body.model, timezone=body.timezone)
+            with httpx.Client(timeout=3, trust_env=False) as client:
+                response = client.get(effective.ollama_url + "/api/tags")
+                response.raise_for_status()
+                names = [model["name"] for model in response.json()["models"]]
+            if body.model not in names:
+                raise ValueError("Selecciona un modelo instalado en Ollama.")
+            app.state.store.save_settings(body.model_dump())
+            app.state.settings = effective
+            runtime.provider.model = body.model
+            app.state.clock.timezone = body.timezone
+            return body
 
     @app.post("/api/voice/transcribe")
     async def transcribe(request: Request):
