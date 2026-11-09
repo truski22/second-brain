@@ -418,7 +418,7 @@ export interface components {
              * Type
              * @enum {string}
              */
-            type: "start" | "reset" | "token" | "tool_start" | "tool_result" | "reply" | "memory_queued" | "memory_saved" | "memory_failed" | "warning" | "error" | "done";
+            type: "start" | "reset" | "token" | "tool_start" | "tool_result" | "reply" | "memory_queued" | "memory_saved" | "memory_failed" | "warning" | "error" | "done" | "approval_required" | "approval_resolved" | "loop_detected" | "budget_exceeded";
             /** Text */
             text?: string | null;
             /** Message */
