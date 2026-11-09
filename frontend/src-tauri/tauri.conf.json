@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Second Brain",
+  "version": "0.1.0",
+  "identifier": "local.secondbrain.desktop",
+  "build": { "frontendDist": "../dist" },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob:; connect-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "externalBin": ["binaries/second-brain-backend"],
+    "resources": { "../../dist/second-brain-backend/_internal/": "_internal/" }
+  }
+}
