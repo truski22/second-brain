@@ -1,5 +1,5 @@
 """Spanish texts for the harness runtime; the harness itself is language-neutral."""
-from tenet_harness.contracts import Messages
+from tenet_harness import Messages
 
 SPANISH = Messages(
     empty_message="El mensaje está vacío.",

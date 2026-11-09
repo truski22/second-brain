@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from tenet_harness.contracts import Registry, RunRequest
+from tenet_harness import Registry, RunRequest
 from tenet_harness.providers import OllamaProvider
 from tenet_harness.runtime import Runtime
 from tenet_harness.storage import Store

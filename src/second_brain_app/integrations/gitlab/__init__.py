@@ -5,7 +5,7 @@ from typing import Literal
 import httpx
 from pydantic import BaseModel, ConfigDict, Field
 
-from tenet_harness.contracts import RunContext, Tool, ToolError, ToolResult, Toolset
+from tenet_harness import RunContext, Tool, ToolError, ToolResult, Toolset
 from tenet_harness.storage import Store
 
 from ..base import ConnectionField, https_base_url

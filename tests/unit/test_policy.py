@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from threading import Event
 from time import monotonic
 
-from tenet_harness.contracts import RunContext
+from tenet_harness import RunContext
 from tenet_harness.storage import Store
 from second_brain_app.agent import definition
 from second_brain_app.agent import AddReminder, CompleteReminder, NoArgs
@@ -63,7 +63,7 @@ def test_external_action_claims_are_rejected(tmp_path):
 
 
 def test_external_write_requests_answered_without_model(tmp_path):
-    from tenet_harness.contracts import Toolset
+    from tenet_harness import Toolset
     clock = Clock(now=lambda: datetime(2026, 9, 29, tzinfo=timezone.utc))
     reminders = Reminders(Store(tmp_path / "test.sqlite"), clock)
     agent = definition(clock, reminders, FakeMemory(), (Toolset("gitlab", "GitLab", (), external=True),))

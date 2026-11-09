@@ -3,7 +3,7 @@ from urllib.parse import quote
 
 import httpx
 
-from tenet_harness.contracts import ToolError
+from tenet_harness import ToolError
 
 from ..base import system_tls
 

@@ -27,7 +27,7 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from tenet_harness.contracts import Registry, RunRequest  # noqa: E402
+from tenet_harness import Registry, RunRequest  # noqa: E402
 from tenet_harness.evaluation import Observation, compare, render_markdown, score, summarize  # noqa: E402
 from tenet_harness.providers import OllamaProvider  # noqa: E402
 from tenet_harness.routing import CombinedRouter, EmbeddingRouter, KeywordRouter  # noqa: E402

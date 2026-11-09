@@ -197,7 +197,7 @@ through the runtime's `use_toolset` meta-tool. This keeps prompts small enough f
 ```python
 from langchain_core.messages import SystemMessage
 from pydantic import BaseModel
-from tenet_harness.contracts import AgentDefinition, Effect, Tool, ToolResult, Toolset
+from tenet_harness import AgentDefinition, Effect, Tool, ToolResult, Toolset
 from tenet_harness.routing import KeywordRouter
 
 class EchoInput(BaseModel):

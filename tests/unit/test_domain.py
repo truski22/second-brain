@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 
 import pytest
 
-from tenet_harness.contracts import RunContext
+from tenet_harness import RunContext
 from tenet_harness.storage import Store
 from second_brain_app.agent import AddReminder, CompleteReminder, NoArgs, definition
 from second_brain_app.config import Settings

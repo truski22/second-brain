@@ -3,7 +3,7 @@ from time import monotonic
 
 import pytest
 
-from tenet_harness.contracts import RunContext, ToolError
+from tenet_harness import RunContext, ToolError
 from tenet_harness.storage import Store
 from second_brain_app.integrations.gitlab import GitLabIntegration, Item, MyMergeRequests
 from second_brain_app.integrations.secrets import MemorySecrets

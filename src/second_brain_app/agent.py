@@ -4,7 +4,7 @@ import re
 from langchain_core.messages import SystemMessage
 from pydantic import BaseModel, ConfigDict, Field
 
-from tenet_harness.contracts import AgentDefinition, Effect, Router, RunContext, Tool, ToolResult, Toolset
+from tenet_harness import AgentDefinition, Effect, Router, RunContext, Tool, ToolResult, Toolset
 
 
 class NoArgs(BaseModel):

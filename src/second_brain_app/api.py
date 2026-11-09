@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse, JSONResponse, Response, StreamingRes
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from tenet_harness.contracts import Registry, RunEvent, RunRequest
+from tenet_harness import Registry, RunEvent, RunRequest
 from tenet_harness.providers import OllamaProvider
 from tenet_harness.routing import CombinedRouter, EmbeddingRouter, KeywordRouter
 from tenet_harness.runtime import BusyError, Runtime, TERMINAL
